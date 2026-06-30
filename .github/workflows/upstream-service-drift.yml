@@ -21,8 +21,28 @@ jobs:
       - uses: bufbuild/buf-setup-action@v1
         with:
           version: '1.47.2'
-      - name: Check upstream service pin
+      - name: Update upstream service pin
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash scripts/update-upstream-service-pin.sh --check-only
+        run: bash scripts/update-upstream-service-pin.sh
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/update-upstream-service-pin
+          delete-branch: true
+          title: "chore: update upstream Signal service pin"
+          commit-message: "chore: update upstream Signal service pin"
+          body: |
+            Automated refresh of selected signalapp/libsignal service protos.
 
+            Verification run by this workflow:
+            - scripts/fetch-upstream-protos.sh
+            - buf generate
+            - go test ./... -count=1
+      - name: Enable automerge
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --auto --squash

@@ -23,6 +23,6 @@ if [[ "$check_only" == "1" ]]; then
 fi
 
 bash scripts/fetch-upstream-protos.sh "$latest"
+buf build
 buf generate
 go test ./... -count=1
-

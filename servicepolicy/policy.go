@@ -76,8 +76,39 @@ func (p Policy) Validate() error {
 	}
 }
 
-func (p Policy) AllowsLiveTransport() bool {
-	return false
+type LiveApprovalSet map[string]bool
+
+func NewLiveApprovalSet(approvals ...string) LiveApprovalSet {
+	set := LiveApprovalSet{}
+	for _, approval := range approvals {
+		if approval != "" {
+			set[approval] = true
+		}
+	}
+	return set
+}
+
+func RequiredLiveApprovals() []string {
+	return append([]string(nil), requiredLiveApprovals...)
+}
+
+// AllowsLiveTransport reports whether policy metadata contains the approvals a
+// future live transport would require. Phase 2D still ships no live transport
+// implementation, and Validate continues to reject ModeLive.
+func (p Policy) AllowsLiveTransport(sets ...LiveApprovalSet) bool {
+	if p.Mode != ModeLive {
+		return false
+	}
+	var approvals LiveApprovalSet
+	if len(sets) > 0 {
+		approvals = sets[0]
+	}
+	for _, required := range requiredLiveApprovals {
+		if !approvals[required] {
+			return false
+		}
+	}
+	return true
 }
 
 func EvaluateCompliance(req ComplianceRequest) ComplianceReport {

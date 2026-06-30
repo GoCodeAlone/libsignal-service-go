@@ -37,3 +37,22 @@ live service transport return `servicepolicy.ErrLiveServiceDisabled`.
 `servicepolicy.EvaluateCompliance` reports which live official-service actions
 remain blocked and which approvals a future design would need before any live
 transport can be enabled. Phase 2C keeps every live transport disabled.
+
+## Phase 2D Service Client Contracts
+
+`serviceclient.Client` defines deterministic official-service request contracts
+for registration, linked devices, send, receive, username reservation, backup
+upload/download, and challenge responses. These contracts are for test doubles
+and future policy-gated transports; this package still ships no live official
+Signal endpoint client.
+
+Every request carries an account ref, device ref, idempotency key, request
+timestamp, consent evidence ref, audit ref, credential ref, and optional
+non-exportable key handle ref. Responses return request/status metadata,
+challenge refs, and secret refs. Private key material, credentials, backup
+keys, and challenge responses remain host-managed secrets and must not be
+returned as ordinary output values.
+
+`servicepolicy.Policy.AllowsLiveTransport` is approval-aware. It returns true
+only for live mode with every required approval identifier present, but no live
+transport implementation exists in this phase.

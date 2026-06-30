@@ -22,9 +22,26 @@ func TestPolicyValidateRejectsLiveMode(t *testing.T) {
 
 func TestPolicyNeverAllowsLiveTransport(t *testing.T) {
 	for _, mode := range []Mode{"", ModeDisabled, ModeTestDouble, ModeLive, "other"} {
-		if (Policy{Mode: mode}).AllowsLiveTransport() {
+		if (Policy{Mode: mode}).AllowsLiveTransport(LiveApprovalSet{}) {
 			t.Fatalf("mode %q unexpectedly allowed live transport", mode)
 		}
+	}
+}
+
+func TestPolicyAllowsLiveTransportOnlyWithEveryApproval(t *testing.T) {
+	approvals := NewLiveApprovalSet(RequiredLiveApprovals()...)
+	if !(Policy{Mode: ModeLive}).AllowsLiveTransport(approvals) {
+		t.Fatal("live mode with every required approval should be policy-ready for a future live transport")
+	}
+	for _, missing := range RequiredLiveApprovals() {
+		partial := NewLiveApprovalSet(RequiredLiveApprovals()...)
+		delete(partial, missing)
+		if (Policy{Mode: ModeLive}).AllowsLiveTransport(partial) {
+			t.Fatalf("live mode with missing approval %q allowed live transport", missing)
+		}
+	}
+	if (Policy{Mode: ModeTestDouble}).AllowsLiveTransport(approvals) {
+		t.Fatal("test-double mode must not allow live transport even with approvals")
 	}
 }
 

@@ -28,3 +28,73 @@ func TestPolicyNeverAllowsLiveTransport(t *testing.T) {
 	}
 }
 
+func TestComplianceBlocksLiveActions(t *testing.T) {
+	actions := []Action{
+		ActionRegister,
+		ActionLogin,
+		ActionLinkedDevice,
+		ActionSend,
+		ActionReceive,
+		ActionBackupUpload,
+		ActionBackupDownload,
+		ActionUsernameReserve,
+		ActionProductionEgress,
+	}
+	for _, mode := range []Mode{"", ModeDisabled, ModeTestDouble, ModeLive} {
+		report := EvaluateCompliance(ComplianceRequest{Mode: mode, RequestedActions: actions})
+		if report.Approved {
+			t.Fatalf("mode %q approved live actions: %+v", mode, report)
+		}
+		if !report.LiveServiceDisabled {
+			t.Fatalf("mode %q did not report live service disabled", mode)
+		}
+		if len(report.BlockedActions) != len(actions) {
+			t.Fatalf("mode %q blocked actions = %v, want %v", mode, report.BlockedActions, actions)
+		}
+		for _, approval := range []string{
+			"operator_live_service_approval",
+			"legal_tos_review",
+			"account_owner_consent",
+			"abuse_rate_limit_plan",
+			"credential_custody_plan",
+			"audit_retention_plan",
+			"egress_allowlist",
+		} {
+			if !containsString(report.RequiredApprovals, approval) {
+				t.Fatalf("mode %q missing approval %q in %v", mode, approval, report.RequiredApprovals)
+			}
+		}
+	}
+}
+
+func TestComplianceAllowsNoActionsForDisabledBoundary(t *testing.T) {
+	report := EvaluateCompliance(ComplianceRequest{Mode: ModeDisabled})
+	if !report.Approved {
+		t.Fatalf("disabled/no-action report unexpectedly denied: %+v", report)
+	}
+	if !report.LiveServiceDisabled {
+		t.Fatal("disabled/no-action report must still state live service is disabled")
+	}
+	if len(report.BlockedActions) != 0 {
+		t.Fatalf("blocked actions = %v, want empty", report.BlockedActions)
+	}
+}
+
+func TestComplianceRejectsUnsupportedMode(t *testing.T) {
+	report := EvaluateCompliance(ComplianceRequest{Mode: Mode("unsupported")})
+	if report.Approved {
+		t.Fatalf("unsupported mode approved: %+v", report)
+	}
+	if !report.LiveServiceDisabled {
+		t.Fatal("unsupported mode must still keep live service disabled")
+	}
+}
+
+func containsString(values []string, want string) bool {
+	for _, got := range values {
+		if got == want {
+			return true
+		}
+	}
+	return false
+}

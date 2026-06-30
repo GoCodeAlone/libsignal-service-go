@@ -1,0 +1,59 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package
+      path: TextSecure.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/textsecure
+    - file_option: go_package
+      path: google/rpc/error_details.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/google/rpc/errdetails
+    - file_option: go_package
+      path: google/rpc/status.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/google/rpc/status
+    - file_option: go_package
+      path: org/signal/chat/account.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/account
+    - file_option: go_package
+      path: org/signal/chat/backups.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/backup
+    - file_option: go_package
+      path: org/signal/chat/challenge.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/challenge
+    - file_option: go_package
+      path: org/signal/chat/common.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/common
+    - file_option: go_package
+      path: org/signal/chat/credentials.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/credentials
+    - file_option: go_package
+      path: org/signal/chat/device.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/device
+    - file_option: go_package
+      path: org/signal/chat/errors.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/errors
+    - file_option: go_package
+      path: org/signal/chat/keys.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/keys
+    - file_option: go_package
+      path: org/signal/chat/messages.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/messages
+    - file_option: go_package
+      path: org/signal/chat/profile.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/profile
+    - file_option: go_package
+      path: org/signal/chat/require.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/require
+    - file_option: go_package
+      path: org/signal/chat/tag.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/tag
+    - file_option: go_package
+      path: chat_websocket.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/signal/proto/chat_websocket
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.36.10
+    out: gen
+    opt: module=github.com/GoCodeAlone/libsignal-service-go/gen
+  - remote: buf.build/grpc/go:v1.6.1
+    out: gen
+    opt: module=github.com/GoCodeAlone/libsignal-service-go/gen

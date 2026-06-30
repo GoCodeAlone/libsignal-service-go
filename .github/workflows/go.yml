@@ -1,0 +1,28 @@
+name: go
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.2'
+          cache: true
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          version: '1.47.2'
+      - run: buf build
+      - run: buf generate
+      - run: git diff --exit-code gen internal/upstream/manifest.json
+      - run: bash scripts/check-no-live-endpoints.sh
+      - run: go test ./... -race -count=1

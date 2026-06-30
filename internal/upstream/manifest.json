@@ -1,0 +1,135 @@
+{
+  "upstream_repo": "signalapp/libsignal",
+  "upstream_tag": "v0.96.4",
+  "descriptor_checksum_sha256": "9f647ca4a75f581514cbe080c792871e10d7dbd7b22bd6faf2832e15d447e484",
+  "artifacts": [
+    {
+      "upstream_path": "rust/net/grpc/proto/TextSecure.proto",
+      "local_path": "proto/signal/net/grpc/TextSecure.proto",
+      "blob_sha": "4a8845f4beecaba2d8d42a4ff9e372457bd15646",
+      "sha256": "59a93b3cf02389df14bfcd519b4277627d1dfb83feffd29d7023d93d9ff78519",
+      "mode": "generated",
+      "header": "/**\n * Copyright 2013 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/google/rpc/error_details.proto",
+      "local_path": "proto/signal/net/grpc/google/rpc/error_details.proto",
+      "blob_sha": "4f9ecff03517c892dc94cf35a2df87cb75367f89",
+      "sha256": "da3f5ac1304abfd6ab2f959b4ac3e6cb0758b52fca388c226bf3b92af95e07ed",
+      "mode": "generated",
+      "header": "// Copyright 2025 Google LLC\n//\n// Licensed under the Apache License, Version 2.0 (the \"License\");\n// you may not use this file except in compliance with the License.\n// You may obtain a copy of the License at\n//\n//     http://www.apache.org/licenses/LICENSE-2.0\n//"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/google/rpc/status.proto",
+      "local_path": "proto/signal/net/grpc/google/rpc/status.proto",
+      "blob_sha": "dc14c9438caaed651974822d88761c64646c0261",
+      "sha256": "3b5c712455570ac4342dd3c521c4c11011652ae9a0fbca75ba22fcc45c6e1991",
+      "mode": "generated",
+      "header": "// Copyright 2025 Google LLC\n//\n// Licensed under the Apache License, Version 2.0 (the \"License\");\n// you may not use this file except in compliance with the License.\n// You may obtain a copy of the License at\n//\n//     http://www.apache.org/licenses/LICENSE-2.0\n//"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/account.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/account.proto",
+      "blob_sha": "3bb16aba7c15f7962a97b69707ad5140b94919d9",
+      "sha256": "eed86fcb1b87d956d24afb139d5ddb69aada50768c597a2e82ab2798d38743a2",
+      "mode": "generated",
+      "header": ""
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/backups.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/backups.proto",
+      "blob_sha": "7448d42b10bc09b1984df3f658e4aad2e925f2a2",
+      "sha256": "5bf9d81e05930fa52f18c426b493adb63fc28a6f9370944c904f1188da9d76a2",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2024 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/challenge.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/challenge.proto",
+      "blob_sha": "a3eef30c8836f38c171ba44a1dd9f6acf109d1fd",
+      "sha256": "c43a17b01c9f672d56d3abdd71033f38caf49df0b4f05bbbc17503faecaa629a",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2026 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/common.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/common.proto",
+      "blob_sha": "91cd753d8eebefa4492db14e1204aa6494c84e0e",
+      "sha256": "69512c1c44509249d17fe4a65b53a06381174a060aaaf180464087f1110e067d",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/credentials.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/credentials.proto",
+      "blob_sha": "3b0d4dc06ce967b36d8d3dc9e8dbd2b4b5008aac",
+      "sha256": "6a558c559edb05eb7c6555f8ef3c0d576d72dbe296e09f18de15f3a7481f989e",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/device.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/device.proto",
+      "blob_sha": "90eeb7ca1e02e658de558d869aa3724edffd9268",
+      "sha256": "01446aa259df0a680fedf58848820823cb869b15118eb9c924ffdd6ac2b82c3c",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/errors.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/errors.proto",
+      "blob_sha": "356f8aa994a0e8edccce389a4e5b9367eb08d955",
+      "sha256": "f6637780cda78f7ff6f76819605bbd91d59989518f1e119e42afd2bb9db4e58b",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2025 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/keys.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/keys.proto",
+      "blob_sha": "cbc2b9bd92ab20111914f5180bee17362a5b0430",
+      "sha256": "5fb39b8bf1c56b9b0b94d525009cf35daf0749affc5d5989663132381b979ac6",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/messages.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/messages.proto",
+      "blob_sha": "ca39f303df804fd89bd70d6184d5ec89cf7e4402",
+      "sha256": "3fc28f27f90327d7a1c392f87e9f5e54a64b091872b174eb0ee7907f73d90230",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2025 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/profile.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/profile.proto",
+      "blob_sha": "12788753113560f01cf47a08708d3c015b133cbe",
+      "sha256": "bc5092f8da123cbc350787825a52147e165fa5c987700ce6d4f9404f7807cfce",
+      "mode": "generated",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/require.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/require.proto",
+      "blob_sha": "f3b8c5a5762e8740517c60f50c1096f543714ef0",
+      "sha256": "25bcddd0cbba33e8d20ab56bb4238890e67681bbb38ff01d49d7097e302f0a3e",
+      "mode": "generated-support",
+      "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/tag.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/tag.proto",
+      "blob_sha": "507a8056e59b1ca99b013feb9ed7bf38c905da0a",
+      "sha256": "f17b0a1a04827b71dc1c015316f5c0496ba40fe58f190395c623dd561ecc5a7a",
+      "mode": "generated-support",
+      "header": "/*\n * Copyright 2025 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/src/proto/chat_websocket.proto",
+      "local_path": "proto/signal/net/src/chat_websocket.proto",
+      "blob_sha": "2b07852fa03ea24b9e644f85ac4ac36eec8cd8ff",
+      "sha256": "e67351b52fb4ef39091f9b3ee0934a88979255c368548adcec42133447b6c0a5",
+      "mode": "generated",
+      "header": "//\n// Copyright 2023 Signal Messenger, LLC.\n// SPDX-License-Identifier: AGPL-3.0-only\n//"
+    }
+  ]
+}

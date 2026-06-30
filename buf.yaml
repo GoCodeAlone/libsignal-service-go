@@ -1,0 +1,7 @@
+version: v2
+modules:
+  - path: proto/signal/net/grpc
+  - path: proto/signal/net/src
+breaking:
+  use:
+    - FILE

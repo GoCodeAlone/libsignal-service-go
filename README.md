@@ -8,9 +8,10 @@ This repository is a community compatibility project for selected
 `signalapp/libsignal` service wire artifacts. It is not affiliated with,
 endorsed by, or maintained by Signal Messenger LLC.
 
-The first development milestone is intentionally limited to generated
-protobuf/gRPC types, deterministic fake transports, and policy gates that keep
-live official Signal service access disabled.
+The current public surface includes generated protobuf/gRPC types, typed
+operation envelopes, deterministic fake and sandbox transports, approval-aware
+policy gates, and a local operator fixture. It still does not ship an official
+Signal production endpoint client.
 
 ## Upstream Baseline
 
@@ -28,23 +29,24 @@ Copied upstream files preserve their original license/header comments. Signal
 Messenger sources are AGPL-3.0-only; bundled Google RPC protos retain their
 Apache-2.0 notices.
 
-## Phase 2B Boundary
+## Service Boundary
 
 This package does not log in to, register with, send to, receive from, or
-otherwise contact the official Signal service. Code paths that would create a
-live service transport return `servicepolicy.ErrLiveServiceDisabled`.
+otherwise contact the official Signal service by default. Code paths without a
+complete machine-checkable approval package return
+`servicepolicy.ErrLiveServiceDisabled`.
 
 `servicepolicy.EvaluateCompliance` reports which live official-service actions
-remain blocked and which approvals a future design would need before any live
-transport can be enabled. Phase 2C keeps every live transport disabled.
+remain blocked and which approval artifacts are missing before a host-supplied
+transport can be considered policy-ready.
 
-## Phase 2D Service Client Contracts
+## Service Client Contracts
 
 `serviceclient.Client` defines deterministic official-service request contracts
 for registration, linked devices, send, receive, username reservation, backup
 upload/download, and challenge responses. These contracts are for test doubles
-and future policy-gated transports; this package still ships no live official
-Signal endpoint client.
+and host-supplied policy-gated transports; this package still ships no live
+official Signal endpoint client.
 
 Every request carries an account ref, device ref, idempotency key, request
 timestamp, consent evidence ref, audit ref, credential ref, and optional
@@ -58,8 +60,8 @@ true only for live mode with a machine-checkable approval package that includes
 operator approval, supported service authorization, account-owner consent,
 custody, abuse/rate-limit, egress allowlist, idempotency, and audit policy
 metadata. Human/operator evidence is recorded, but narrative evidence alone does
-not enable live transport. No live transport implementation or official Signal
-endpoint constant exists in this phase.
+not enable live transport. No official Signal endpoint constant exists in this
+repository.
 
 ## Operation Envelopes
 

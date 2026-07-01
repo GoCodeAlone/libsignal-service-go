@@ -7,13 +7,13 @@ func TestCurrentBaseline(t *testing.T) {
 	if b.UpstreamTag != "v0.96.4" {
 		t.Fatalf("upstream tag = %q, want v0.96.4", b.UpstreamTag)
 	}
-	if b.DescriptorChecksum != "9f647ca4a75f581514cbe080c792871e10d7dbd7b22bd6faf2832e15d447e484" {
+	if b.DescriptorChecksum != "203ff86981ca5b249cd0a373296f1754303e070fd5341225a3b4d8995f6c2286" {
 		t.Fatalf("descriptor checksum = %q", b.DescriptorChecksum)
 	}
-	if b.ManifestDigest != "5973a782b6ce4836f4588c3e797a1070eaac04669f758cb82572b967cfcc0b60" {
+	if b.ManifestDigest != "e6d117566fe76ce537709b45bbdfb08a148d89b4c6e7273e5401f7ea1f72ca08" {
 		t.Fatalf("manifest digest = %q", b.ManifestDigest)
 	}
-	for _, domain := range []string{"account", "device", "messages", "profile", "keys", "backups_metadata", "challenge", "credentials"} {
+	for _, domain := range []string{"account", "device", "messages", "profile", "keys", "backups_metadata", "challenge", "credentials", "donations_metadata", "subscriptions_metadata"} {
 		if !b.HasDomain(domain) {
 			t.Fatalf("baseline missing domain %q in %v", domain, b.SelectedDomains)
 		}

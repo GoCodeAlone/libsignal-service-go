@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -56,6 +57,56 @@ func TestDescriptorChecksum(t *testing.T) {
 	}
 }
 
+func TestManifestRecordsV0964ServiceDeltas(t *testing.T) {
+	m := readTestManifest(t)
+	required := []string{
+		"proto/signal/net/grpc/TextSecure.proto",
+		"proto/signal/net/grpc/org/signal/chat/account.proto",
+		"proto/signal/net/grpc/org/signal/chat/backups.proto",
+		"proto/signal/net/grpc/org/signal/chat/challenge.proto",
+		"proto/signal/net/grpc/org/signal/chat/device.proto",
+		"proto/signal/net/grpc/org/signal/chat/donations.proto",
+		"proto/signal/net/grpc/org/signal/chat/subscriptions.proto",
+	}
+	seen := map[string]bool{}
+	for _, artifact := range m.Artifacts {
+		seen[artifact.LocalPath] = true
+	}
+	for _, path := range required {
+		if !seen[path] {
+			t.Fatalf("manifest missing v0.96.4 service delta artifact %q", path)
+		}
+	}
+}
+
+func TestManifestIncludesEveryCopiedProto(t *testing.T) {
+	m := readTestManifest(t)
+	seen := map[string]bool{}
+	for _, artifact := range m.Artifacts {
+		seen[artifact.LocalPath] = true
+	}
+	var missing []string
+	err := filepath.WalkDir("../../proto", func(path string, entry os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if entry.IsDir() || !strings.HasSuffix(path, ".proto") {
+			return nil
+		}
+		local := strings.TrimPrefix(path, "../../")
+		if !seen[local] {
+			missing = append(missing, local)
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk proto: %v", err)
+	}
+	if len(missing) > 0 {
+		t.Fatalf("manifest missing copied proto files: %v", missing)
+	}
+}
+
 func readTestManifest(t *testing.T) Manifest {
 	t.Helper()
 	data, err := os.ReadFile("manifest.json")
@@ -68,4 +119,3 @@ func readTestManifest(t *testing.T) Manifest {
 	}
 	return m
 }
-

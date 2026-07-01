@@ -31,11 +31,13 @@ var artifacts = []artifactSpec{
 	{"rust/net/grpc/proto/org/signal/chat/common.proto", "proto/signal/net/grpc/org/signal/chat/common.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/credentials.proto", "proto/signal/net/grpc/org/signal/chat/credentials.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/device.proto", "proto/signal/net/grpc/org/signal/chat/device.proto", "generated"},
+	{"rust/net/grpc/proto/org/signal/chat/donations.proto", "proto/signal/net/grpc/org/signal/chat/donations.proto", "generated-support"},
 	{"rust/net/grpc/proto/org/signal/chat/errors.proto", "proto/signal/net/grpc/org/signal/chat/errors.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/keys.proto", "proto/signal/net/grpc/org/signal/chat/keys.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/messages.proto", "proto/signal/net/grpc/org/signal/chat/messages.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/profile.proto", "proto/signal/net/grpc/org/signal/chat/profile.proto", "generated"},
 	{"rust/net/grpc/proto/org/signal/chat/require.proto", "proto/signal/net/grpc/org/signal/chat/require.proto", "generated-support"},
+	{"rust/net/grpc/proto/org/signal/chat/subscriptions.proto", "proto/signal/net/grpc/org/signal/chat/subscriptions.proto", "generated-support"},
 	{"rust/net/grpc/proto/org/signal/chat/tag.proto", "proto/signal/net/grpc/org/signal/chat/tag.proto", "generated-support"},
 	{"rust/net/src/proto/chat_websocket.proto", "proto/signal/net/src/chat_websocket.proto", "generated"},
 }
@@ -151,4 +153,3 @@ func must(err error) {
 		os.Exit(1)
 	}
 }
-

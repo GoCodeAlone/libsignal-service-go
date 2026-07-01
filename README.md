@@ -60,3 +60,14 @@ custody, abuse/rate-limit, egress allowlist, idempotency, and audit policy
 metadata. Human/operator evidence is recorded, but narrative evidence alone does
 not enable live transport. No live transport implementation or official Signal
 endpoint constant exists in this phase.
+
+## Operation Envelopes
+
+The `service` package exposes typed operation envelopes for registration,
+linked-device preparation, send, receive, challenge, username, backup, and SVR
+request flows. Envelopes require `operation_id`, `idempotency_key`,
+`account_ref`, and `requested_at` before any transport can submit them.
+
+Linked-device envelopes additionally require a display name, consent reference,
+consent expiry, revocation URI, and unlink proof reference. Audit metadata stores
+a redacted account hash and rejects message-body and phone-number fields.

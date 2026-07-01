@@ -71,3 +71,21 @@ request flows. Envelopes require `operation_id`, `idempotency_key`,
 Linked-device envelopes additionally require a display name, consent reference,
 consent expiry, revocation URI, and unlink proof reference. Audit metadata stores
 a redacted account hash and rejects message-body and phone-number fields.
+
+## Operation Adapters
+
+`service.NewAdapter` wraps an operation transport with mode-specific validation.
+Fake and sandbox modes are deterministic test paths. Live mode remains
+approval-gated and requires a machine-checkable approval package, account-owner
+consent, custody policy, abuse/rate-limit policy, audit policy, and endpoint
+allowlist entry before any operation can be submitted.
+
+The `fake` package accepts every named operation and records redacted audit
+metadata. The `sandbox` package requires an explicit sandbox endpoint and
+rejects official-looking endpoints unless a test-only override is supplied. The
+`operatorfixture` package exercises the same live adapter path against a local
+allowlisted endpoint; it is a conformance fixture, not an official Signal service
+client.
+
+This repository still does not compile official production endpoint constants or
+perform official Signal service egress.

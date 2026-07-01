@@ -5,8 +5,9 @@ import (
 	"time"
 )
 
-// ErrLiveServiceDisabled is returned by Phase 2B code paths that would create
-// a live official Signal service transport.
+// ErrLiveServiceDisabled is returned by code paths that hard-disable live mode
+// or would create/use a live official Signal service transport without a
+// complete approval package.
 var ErrLiveServiceDisabled = errors.New("live Signal service transport disabled")
 
 type Mode string

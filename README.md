@@ -32,13 +32,14 @@ Apache-2.0 notices.
 ## Service Boundary
 
 This package does not log in to, register with, send to, receive from, or
-otherwise contact the official Signal service by default. Code paths without a
-complete machine-checkable approval package return
-`servicepolicy.ErrLiveServiceDisabled`.
+otherwise contact the official Signal service by default. Code paths that
+hard-disable live mode or lack a complete machine-checkable approval package
+return `servicepolicy.ErrLiveServiceDisabled`.
 
 `servicepolicy.EvaluateCompliance` reports which live official-service actions
-remain blocked and which approval artifacts are missing before a host-supplied
-transport can be considered policy-ready.
+remain blocked and which approval identifiers are required for the requested
+mode/actions. Approval-package completeness is checked by
+`servicepolicy.ValidateApprovalPackage`.
 
 ## Service Client Contracts
 

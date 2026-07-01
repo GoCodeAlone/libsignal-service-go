@@ -30,6 +30,9 @@ managed:
       path: org/signal/chat/device.proto
       value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/device
     - file_option: go_package
+      path: org/signal/chat/donations.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/donations
+    - file_option: go_package
       path: org/signal/chat/errors.proto
       value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/errors
     - file_option: go_package
@@ -44,6 +47,9 @@ managed:
     - file_option: go_package
       path: org/signal/chat/require.proto
       value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/require
+    - file_option: go_package
+      path: org/signal/chat/subscriptions.proto
+      value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/subscriptions
     - file_option: go_package
       path: org/signal/chat/tag.proto
       value: github.com/GoCodeAlone/libsignal-service-go/gen/org/signal/chat/tag

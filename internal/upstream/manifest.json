@@ -1,7 +1,7 @@
 {
   "upstream_repo": "signalapp/libsignal",
   "upstream_tag": "v0.96.4",
-  "descriptor_checksum_sha256": "9f647ca4a75f581514cbe080c792871e10d7dbd7b22bd6faf2832e15d447e484",
+  "descriptor_checksum_sha256": "203ff86981ca5b249cd0a373296f1754303e070fd5341225a3b4d8995f6c2286",
   "artifacts": [
     {
       "upstream_path": "rust/net/grpc/proto/TextSecure.proto",
@@ -76,6 +76,14 @@
       "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
     },
     {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/donations.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/donations.proto",
+      "blob_sha": "9af7fd39004ef82dab8ce02b1d994b8ba170747d",
+      "sha256": "621ab132b0afeafdce3e97e3496952385e5d4dfcea47c9f265c093301c98d405",
+      "mode": "generated-support",
+      "header": "/*\n * Copyright 2026 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
       "upstream_path": "rust/net/grpc/proto/org/signal/chat/errors.proto",
       "local_path": "proto/signal/net/grpc/org/signal/chat/errors.proto",
       "blob_sha": "356f8aa994a0e8edccce389a4e5b9367eb08d955",
@@ -114,6 +122,14 @@
       "sha256": "25bcddd0cbba33e8d20ab56bb4238890e67681bbb38ff01d49d7097e302f0a3e",
       "mode": "generated-support",
       "header": "/*\n * Copyright 2023 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
+    },
+    {
+      "upstream_path": "rust/net/grpc/proto/org/signal/chat/subscriptions.proto",
+      "local_path": "proto/signal/net/grpc/org/signal/chat/subscriptions.proto",
+      "blob_sha": "63c06ee3669853360151a3d1d6e094a587d0a8bc",
+      "sha256": "9db1d2b31642ee0271585338014d8cd8f0ff043c15da0adb76951684959accf7",
+      "mode": "generated-support",
+      "header": "/*\n * Copyright 2026 Signal Messenger, LLC\n * SPDX-License-Identifier: AGPL-3.0-only\n */"
     },
     {
       "upstream_path": "rust/net/grpc/proto/org/signal/chat/tag.proto",

@@ -3,6 +3,7 @@ package servicepolicy
 import (
 	"errors"
 	"testing"
+	"time"
 )
 
 func TestPolicyValidateAllowsDisabledAndTestDouble(t *testing.T) {
@@ -21,27 +22,26 @@ func TestPolicyValidateRejectsLiveMode(t *testing.T) {
 }
 
 func TestPolicyNeverAllowsLiveTransport(t *testing.T) {
+	now := time.Date(2026, 7, 1, 0, 0, 0, 0, time.UTC)
 	for _, mode := range []Mode{"", ModeDisabled, ModeTestDouble, ModeLive, "other"} {
-		if (Policy{Mode: mode}).AllowsLiveTransport(LiveApprovalSet{}) {
+		if (Policy{Mode: mode}).AllowsLiveTransport(ApprovalPackage{}, now) {
 			t.Fatalf("mode %q unexpectedly allowed live transport", mode)
 		}
 	}
 }
 
-func TestPolicyAllowsLiveTransportOnlyWithEveryApproval(t *testing.T) {
-	approvals := NewLiveApprovalSet(RequiredLiveApprovals()...)
-	if !(Policy{Mode: ModeLive}).AllowsLiveTransport(approvals) {
-		t.Fatal("live mode with every required approval should be policy-ready for a future live transport")
+func TestPolicyAllowsLiveTransportOnlyWithApprovalPackage(t *testing.T) {
+	now := time.Date(2026, 7, 1, 0, 0, 0, 0, time.UTC)
+	approval := validApprovalPackage(now)
+	if !(Policy{Mode: ModeLive}).AllowsLiveTransport(approval, now, ActionSend) {
+		t.Fatal("live mode with complete approval package should be policy-ready for a future live transport")
 	}
-	for _, missing := range RequiredLiveApprovals() {
-		partial := NewLiveApprovalSet(RequiredLiveApprovals()...)
-		delete(partial, missing)
-		if (Policy{Mode: ModeLive}).AllowsLiveTransport(partial) {
-			t.Fatalf("live mode with missing approval %q allowed live transport", missing)
-		}
+	approval.ServiceAuthorization.EvidenceRef = ""
+	if (Policy{Mode: ModeLive}).AllowsLiveTransport(approval, now, ActionSend) {
+		t.Fatal("live mode with incomplete approval package allowed live transport")
 	}
-	if (Policy{Mode: ModeTestDouble}).AllowsLiveTransport(approvals) {
-		t.Fatal("test-double mode must not allow live transport even with approvals")
+	if (Policy{Mode: ModeTestDouble}).AllowsLiveTransport(validApprovalPackage(now), now, ActionSend) {
+		t.Fatal("test-double mode must not allow live transport even with approval package")
 	}
 }
 

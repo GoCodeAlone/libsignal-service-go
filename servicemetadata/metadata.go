@@ -20,6 +20,8 @@ var selectedDomains = []string{
 	"backups_metadata",
 	"challenge",
 	"credentials",
+	"donations_metadata",
+	"subscriptions_metadata",
 }
 
 var blockedLiveActions = []string{
@@ -38,8 +40,8 @@ var blockedLiveActions = []string{
 func Current() Baseline {
 	return Baseline{
 		UpstreamTag:        "v0.96.4",
-		DescriptorChecksum: "9f647ca4a75f581514cbe080c792871e10d7dbd7b22bd6faf2832e15d447e484",
-		ManifestDigest:     "5973a782b6ce4836f4588c3e797a1070eaac04669f758cb82572b967cfcc0b60",
+		DescriptorChecksum: "203ff86981ca5b249cd0a373296f1754303e070fd5341225a3b4d8995f6c2286",
+		ManifestDigest:     "e6d117566fe76ce537709b45bbdfb08a148d89b4c6e7273e5401f7ea1f72ca08",
 		SelectedDomains:    append([]string(nil), selectedDomains...),
 		BlockedLiveActions: append([]string(nil), blockedLiveActions...),
 	}

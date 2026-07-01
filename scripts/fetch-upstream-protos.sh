@@ -15,11 +15,13 @@ files=(
   rust/net/grpc/proto/org/signal/chat/common.proto
   rust/net/grpc/proto/org/signal/chat/credentials.proto
   rust/net/grpc/proto/org/signal/chat/device.proto
+  rust/net/grpc/proto/org/signal/chat/donations.proto
   rust/net/grpc/proto/org/signal/chat/errors.proto
   rust/net/grpc/proto/org/signal/chat/keys.proto
   rust/net/grpc/proto/org/signal/chat/messages.proto
   rust/net/grpc/proto/org/signal/chat/profile.proto
   rust/net/grpc/proto/org/signal/chat/require.proto
+  rust/net/grpc/proto/org/signal/chat/subscriptions.proto
   rust/net/grpc/proto/org/signal/chat/tag.proto
   rust/net/src/proto/chat_websocket.proto
 )
@@ -38,4 +40,3 @@ for upstream in "${files[@]}"; do
 done
 
 go run ./internal/upstream/cmd/manifestgen --tag "$tag" --out internal/upstream/manifest.json
-

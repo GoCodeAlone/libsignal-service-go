@@ -53,6 +53,10 @@ challenge refs, and secret refs. Private key material, credentials, backup
 keys, and challenge responses remain host-managed secrets and must not be
 returned as ordinary output values.
 
-`servicepolicy.Policy.AllowsLiveTransport` is approval-aware. It returns true
-only for live mode with every required approval identifier present, but no live
-transport implementation exists in this phase.
+`servicepolicy.Policy.AllowsLiveTransport` is approval-package aware. It returns
+true only for live mode with a machine-checkable approval package that includes
+operator approval, supported service authorization, account-owner consent,
+custody, abuse/rate-limit, egress allowlist, idempotency, and audit policy
+metadata. Human/operator evidence is recorded, but narrative evidence alone does
+not enable live transport. No live transport implementation or official Signal
+endpoint constant exists in this phase.

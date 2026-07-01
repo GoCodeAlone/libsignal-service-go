@@ -1,6 +1,9 @@
 package servicepolicy
 
-import "errors"
+import (
+	"errors"
+	"time"
+)
 
 // ErrLiveServiceDisabled is returned by Phase 2B code paths that would create
 // a live official Signal service transport.
@@ -92,23 +95,15 @@ func RequiredLiveApprovals() []string {
 	return append([]string(nil), requiredLiveApprovals...)
 }
 
-// AllowsLiveTransport reports whether policy metadata contains the approvals a
-// future live transport would require. Phase 2D still ships no live transport
-// implementation, and Validate continues to reject ModeLive.
-func (p Policy) AllowsLiveTransport(sets ...LiveApprovalSet) bool {
+// AllowsLiveTransport reports whether policy metadata contains the
+// machine-checkable approvals a future live transport would require. This
+// package still ships no live transport implementation, and Validate continues
+// to reject ModeLive.
+func (p Policy) AllowsLiveTransport(approval ApprovalPackage, now time.Time, requested ...Action) bool {
 	if p.Mode != ModeLive {
 		return false
 	}
-	var approvals LiveApprovalSet
-	if len(sets) > 0 {
-		approvals = sets[0]
-	}
-	for _, required := range requiredLiveApprovals {
-		if !approvals[required] {
-			return false
-		}
-	}
-	return true
+	return ValidateApprovalPackage(approval, now, requested).LiveAllowed
 }
 
 func EvaluateCompliance(req ComplianceRequest) ComplianceReport {
